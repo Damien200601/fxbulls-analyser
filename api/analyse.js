@@ -113,7 +113,7 @@ CRITICAL: Use REAL price values from the chart. Do not invent numbers. OUTPUT ON
         'X-Title': 'FX BULLS AI Chart Analyser',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.0-flash-exp:free',
+        model: 'meta-llama/llama-3.2-11b-vision-instruct:free',
         max_tokens: 2000,
         temperature: 0.1,
         messages: [
