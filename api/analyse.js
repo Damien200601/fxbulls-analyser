@@ -45,9 +45,9 @@ YOUR TRADING RULES (follow these exactly):
 
 INSTRUMENT DETECTION — identify from chart labels or price range:
 - Forex pairs (EURUSD, GBPUSD, USDJPY, XAUUSD etc): read the pair name from chart header
-- XAUUSD/Gold: price range 1800–3500
-- NAS100/US100: price range 25000–46000
-- US30/DJ30: price range 30000–45000
+- XAUUSD/Gold: price range 1800-3500
+- NAS100/US100: price range 25000-46000
+- US30/DJ30: price range 30000-45000
 - If you cannot read the instrument name clearly, make your best inference from the price range
 
 TIMEFRAME DETECTION — read from the chart label (M1, M5, M15, M30, H1, H4, D1 etc). State what you see.
@@ -65,10 +65,10 @@ JSON structure:
   "qualityScore": "A",
   "qualityReason": "Level tested 3 times previously, clean structure, strong engulfing signal",
   "levels": [
-    {"type": "Resistance", "price": "1.0850", "strength": "Strong — tested 3 times"},
-    {"type": "Resistance", "price": "1.0920", "strength": "Moderate — tested twice"},
-    {"type": "Support", "price": "1.0780", "strength": "Strong — previous major low"},
-    {"type": "Support", "price": "1.0720", "strength": "Moderate — consolidation zone"}
+    {"type": "Resistance", "price": "1.0850", "strength": "Strong - tested 3 times"},
+    {"type": "Resistance", "price": "1.0920", "strength": "Moderate - tested twice"},
+    {"type": "Support", "price": "1.0780", "strength": "Strong - previous major low"},
+    {"type": "Support", "price": "1.0720", "strength": "Moderate - consolidation zone"}
   ],
   "scenarios": [
     {
@@ -76,14 +76,14 @@ JSON structure:
       "entry": "1.0850",
       "setupType": "Retest",
       "confirmation": "Bearish Engulfing candle off the 1.0850 resistance zone",
-      "note": "Primary zone — price broke below here and is now retesting as resistance. Strongest setup."
+      "note": "Primary zone - price broke below here and is now retesting as resistance. Strongest setup."
     },
     {
       "number": 2,
       "entry": "1.0920",
       "setupType": "Zone Touch",
       "confirmation": "Candle close below 1.0920 resistance level",
-      "note": "Alternate zone — only valid if price pushes higher first and rejects from 1.0920."
+      "note": "Alternate zone - only valid if price pushes higher first and rejects from 1.0920."
     }
   ],
   "trade": {
@@ -93,44 +93,51 @@ JSON structure:
     "targets": ["1.0800", "1.0760", "1.0720"],
     "rr": "1:2.5",
     "rrValid": true,
-    "confirmation": "Bearish Engulfing candle — full candle body must engulf the previous candle",
-    "invalidIf": "Price closes with a full candle ABOVE 1.0870 — setup is cancelled"
+    "confirmation": "Bearish Engulfing candle - full candle body must engulf the previous candle",
+    "invalidIf": "Price closes with a full candle ABOVE 1.0870 - setup is cancelled"
   },
-  "bias": "BEARISH — only look for SHORT setups. Do not take any longs until structure shifts.",
+  "bias": "BEARISH - only look for SHORT setups. Do not take any longs until structure shifts.",
   "warning": "Wait for full confirmation candle before entering. Do not enter on the wick alone. Avoid entries 30 minutes before and after high-impact news events."
 }
 
 CRITICAL: Use REAL price values from the chart. Do not invent numbers. OUTPUT ONLY THE JSON.`;
 
-    const apiKey = process.env.GEMINI_API_KEY;
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`;
+    const apiKey = process.env.OPENROUTER_API_KEY;
 
-    const geminiRes = await fetch(url, {
+    const response = await fetch('https://openrouter.ai/api/v1/chat/completions', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${apiKey}`,
+        'HTTP-Referer': 'https://fxbulls.vercel.app',
+        'X-Title': 'FX BULLS AI Chart Analyser',
+      },
       body: JSON.stringify({
-        system_instruction: { parts: [{ text: PROMPT }] },
-        contents: [{
-          parts: [
-            { inline_data: { mime_type: imageMime, data: imageBase64 } },
-            { text: "Analyse this trading chart following the FX BULLS methodology. Return ONLY the JSON object." }
-          ]
-        }],
-        generationConfig: {
-          temperature: 0.1,
-          maxOutputTokens: 2000,
-        }
+        model: 'google/gemini-2.0-flash-exp:free',
+        max_tokens: 2000,
+        temperature: 0.1,
+        messages: [
+          { role: 'system', content: PROMPT },
+          {
+            role: 'user',
+            content: [
+              { type: 'image_url', image_url: { url: `data:${imageMime};base64,${imageBase64}` } },
+              { type: 'text', text: 'Analyse this trading chart following the FX BULLS methodology. Return ONLY the JSON object.' }
+            ]
+          }
+        ]
       })
     });
 
-    const data = await geminiRes.json();
+    const data = await response.json();
 
-    if (!geminiRes.ok) {
-      const msg = data?.error?.message || `Gemini API error ${geminiRes.status}`;
+    if (!response.ok) {
+      const msg = data?.error?.message || `API error ${response.status}`;
       return new Response(JSON.stringify({ error: msg }), { status: 500 });
     }
 
-    const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+    const text = data?.choices?.[0]?.message?.content || '';
+
     return new Response(JSON.stringify({ text }), {
       headers: {
         'Content-Type': 'application/json',
