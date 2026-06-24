@@ -9,6 +9,7 @@
   body{font-family:'Inter','Helvetica Neue',sans-serif;background:#f0f4ff;color:#111827;min-height:100vh}
   button{cursor:pointer;font-family:inherit}
   pre{white-space:pre-wrap;word-break:break-all}
+
   .header{background:#fff;border-bottom:1px solid #dde3f0;padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 1px 8px rgba(26,86,219,.08)}
   .logo-wrap{display:flex;align-items:center;gap:12px}
   .brand{display:flex;align-items:baseline;gap:4px;font-size:18px;font-weight:800}
@@ -16,22 +17,67 @@
   .sub{color:#6b7280;font-size:10px;font-weight:600;letter-spacing:.15em}
   .live-badge{background:#ecfdf5;border:1px solid #6ee7b7;border-radius:20px;padding:5px 12px;display:flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:#059669;letter-spacing:.1em}
   .live-dot{width:6px;height:6px;border-radius:50%;background:#059669}
+
   .body{max-width:520px;margin:0 auto;padding:24px 16px 60px}
-  .upload-zone{background:#fff;border:2px dashed #dde3f0;border-radius:16px;padding:52px 24px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(26,86,219,.05)}
+
+  /* Step indicator */
+  .steps{display:flex;align-items:center;gap:0;margin-bottom:24px;background:#fff;border-radius:12px;padding:16px;border:1px solid #dde3f0}
+  .step{flex:1;display:flex;flex-direction:column;align-items:center;gap:6px;position:relative}
+  .step:not(:last-child)::after{content:'';position:absolute;right:-50%;top:16px;width:100%;height:2px;background:#dde3f0;z-index:0}
+  .step:not(:last-child).done::after{background:#1a56db}
+  .step-circle{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;border:2px solid #dde3f0;background:#fff;color:#9ca3af;position:relative;z-index:1;transition:all .3s}
+  .step.active .step-circle{border-color:#1a56db;background:#1a56db;color:#fff}
+  .step.done .step-circle{border-color:#059669;background:#059669;color:#fff}
+  .step-label{font-size:10px;font-weight:600;color:#9ca3af;letter-spacing:.05em;text-align:center}
+  .step.active .step-label{color:#1a56db}
+  .step.done .step-label{color:#059669}
+
+  /* H4 zones memory bar */
+  .zones-bar{background:#e8effe;border:1.5px solid rgba(26,86,219,.25);border-radius:12px;padding:14px 16px;margin-bottom:16px}
+  .zones-bar-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .zones-bar-title{font-size:11px;font-weight:800;color:#1a56db;letter-spacing:.1em;display:flex;align-items:center;gap:6px}
+  .zones-bar-clear{font-size:11px;color:#dc2626;font-weight:600;background:none;border:none;padding:0;cursor:pointer}
+  .zone-pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:20px;font-size:11px;font-weight:600;margin:3px;border:1px solid}
+  .zone-pill.res{background:#fef2f2;border-color:#fca5a5;color:#dc2626}
+  .zone-pill.sup{background:#ecfdf5;border-color:#6ee7b7;color:#059669}
+
+  /* TF selector */
+  .tf-section{background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;border:1px solid #dde3f0}
+  .tf-title{font-size:12px;font-weight:800;color:#111827;letter-spacing:.08em;margin-bottom:14px}
+  .tf-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:14px}
+  .tf-btn{padding:10px 6px;border-radius:8px;font-size:12px;font-weight:700;border:1.5px solid #dde3f0;background:#f8faff;color:#6b7280;transition:all .2s;text-align:center}
+  .tf-btn.selected{border-color:#1a56db;background:#1a56db;color:#fff}
+  .tf-btn:hover:not(.selected){border-color:#1a56db;color:#1a56db}
+  .tf-mode{display:flex;gap:8px}
+  .tf-mode-btn{flex:1;padding:10px;border-radius:8px;font-size:11px;font-weight:700;border:1.5px solid #dde3f0;background:#f8faff;color:#6b7280;text-align:center;transition:all .2s}
+  .tf-mode-btn.selected{border-color:#1a56db;background:#e8effe;color:#1a56db}
+  .tf-mode-btn .mode-icon{font-size:18px;display:block;margin-bottom:4px}
+  .tf-mode-btn .mode-label{font-size:10px;display:block}
+  .tf-mode-btn .mode-desc{font-size:9px;color:#9ca3af;display:block;margin-top:2px}
+  .tf-mode-btn.selected .mode-desc{color:#1a56db;opacity:.7}
+
+  /* Upload */
+  .upload-zone{background:#fff;border:2px dashed #dde3f0;border-radius:16px;padding:44px 24px;text-align:center;cursor:pointer;transition:all .2s;box-shadow:0 2px 12px rgba(26,86,219,.05)}
   .upload-zone:hover,.upload-zone.drag{background:#e8effe;border-color:#1a56db}
-  .upload-title{font-size:17px;font-weight:700;margin:18px 0 8px;color:#111827}
+  .upload-title{font-size:16px;font-weight:700;margin:14px 0 6px;color:#111827}
   .upload-sub{font-size:13px;color:#6b7280}
-  .upload-hint{font-size:11px;color:#9ca3af;margin-top:8px}
-  .preview-wrap{margin-bottom:20px}
-  .preview-img{width:100%;display:block;max-height:300px;object-fit:contain;background:#000;border-radius:14px;border:1px solid #dde3f0}
+  .upload-hint{font-size:11px;color:#9ca3af;margin-top:6px}
+
+  /* Preview */
+  .preview-wrap{margin-bottom:16px}
+  .preview-img{width:100%;display:block;max-height:260px;object-fit:contain;background:#000;border-radius:14px;border:1px solid #dde3f0}
   .btn-row{display:flex;gap:10px;margin-top:12px}
-  .btn-change{flex:1;background:#fff;border:1.5px solid #dde3f0;color:#6b7280;border-radius:10px;padding:14px;font-size:13px;font-weight:700}
-  .btn-analyse{flex:2;background:linear-gradient(135deg,#1a56db,#1340b5);border:none;color:#fff;border-radius:10px;padding:14px;font-size:14px;font-weight:800;letter-spacing:.08em;box-shadow:0 4px 16px rgba(26,86,219,.3)}
+  .btn-change{flex:1;background:#fff;border:1.5px solid #dde3f0;color:#6b7280;border-radius:10px;padding:13px;font-size:13px;font-weight:700}
+  .btn-analyse{flex:2;background:linear-gradient(135deg,#1a56db,#1340b5);border:none;color:#fff;border-radius:10px;padding:13px;font-size:14px;font-weight:800;letter-spacing:.08em;box-shadow:0 4px 16px rgba(26,86,219,.3)}
   .btn-analyse:disabled{opacity:.6;cursor:not-allowed}
+
+  /* Spinner */
   .spinner-wrap{display:flex;flex-direction:column;align-items:center;padding:48px 0;gap:16px}
   .spinner{width:48px;height:48px;border-radius:50%;border:3px solid #dde3f0;border-top:3px solid #1a56db;animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
   .spinner-text{color:#6b7280;font-size:13px;font-weight:600;letter-spacing:.06em}
+
+  /* Error */
   .error-box{background:#fef2f2;border:1px solid #fca5a5;border-radius:12px;padding:16px 18px;margin-bottom:16px}
   .error-title{color:#dc2626;font-size:13px;font-weight:800;margin-bottom:6px}
   .error-msg{color:#dc2626;font-size:12px;opacity:.85;margin-bottom:10px}
@@ -39,98 +85,85 @@
   .raw-label{color:#6b7280;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:4px}
   .raw-pre{color:#7f1d1d;font-size:10px;max-height:150px;overflow-y:auto}
   .btn-retry{background:#dc2626;border:none;color:#fff;border-radius:8px;padding:10px 18px;font-size:12px;font-weight:700;margin-top:12px}
-  .card{background:#fff;border-radius:14px;padding:18px;margin-bottom:16px;border:1px solid #dde3f0;box-shadow:0 2px 10px rgba(26,86,219,.04)}
-  .section-hdr{display:flex;align-items:center;gap:8px;margin-bottom:14px;font-size:12px;font-weight:800;letter-spacing:.1em;color:#111827}
-  .thumb-wrap{background:#000;border-radius:12px;overflow:hidden;border:1px solid #dde3f0;position:relative;margin-bottom:16px}
-  .thumb-img{width:100%;display:block;max-height:190px;object-fit:contain}
-  .thumb-badge{position:absolute;top:10px;left:10px;display:flex;gap:6px}
-  .badge-dark{background:rgba(0,0,0,.75);border-radius:6px;padding:4px 10px;font-size:11px;font-weight:800;color:#fff}
-  .badge-tf{background:rgba(0,0,0,.55);border-radius:6px;padding:4px 10px;font-size:11px;color:#ccc}
-  .trend-badge{position:absolute;top:10px;right:10px;border-radius:6px;padding:4px 10px;font-size:10px;font-weight:800;color:#fff}
-  /* Quality score */
-  .quality-row{display:flex;align-items:center;gap:10px;padding:12px 16px;border-radius:10px;margin-bottom:16px;border:1.5px solid}
+
+  /* Cards */
+  .card{background:#fff;border-radius:14px;padding:18px;margin-bottom:14px;border:1px solid #dde3f0;box-shadow:0 2px 10px rgba(26,86,219,.04)}
+  .section-hdr{font-size:11px;font-weight:800;letter-spacing:.1em;color:#111827;margin-bottom:14px;display:flex;align-items:center;gap:6px}
+
+  /* Thumb */
+  .thumb-wrap{background:#000;border-radius:12px;overflow:hidden;border:1px solid #dde3f0;position:relative;margin-bottom:14px}
+  .thumb-img{width:100%;display:block;max-height:180px;object-fit:contain}
+  .thumb-badge{position:absolute;top:8px;left:8px;display:flex;gap:6px}
+  .badge-dark{background:rgba(0,0,0,.8);border-radius:6px;padding:3px 8px;font-size:11px;font-weight:800;color:#fff}
+  .badge-tf{background:rgba(0,0,0,.6);border-radius:6px;padding:3px 8px;font-size:11px;color:#ccc}
+  .trend-badge{position:absolute;top:8px;right:8px;border-radius:6px;padding:3px 8px;font-size:10px;font-weight:800;color:#fff}
+
+  /* Quality */
+  .quality-row{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:10px;margin-bottom:14px;border:1.5px solid}
   .quality-a{background:#ecfdf5;border-color:#6ee7b7}
   .quality-b{background:#fffbeb;border-color:#fcd34d}
   .quality-c{background:#fef2f2;border-color:#fca5a5}
-  .quality-badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:900;flex-shrink:0}
-  .quality-a .quality-badge{background:#059669;color:#fff}
-  .quality-b .quality-badge{background:#d97706;color:#fff}
-  .quality-c .quality-badge{background:#dc2626;color:#fff}
-  .quality-label{font-size:10px;font-weight:800;letter-spacing:.1em;margin-bottom:3px}
-  .quality-a .quality-label{color:#059669}
-  .quality-b .quality-label{color:#d97706}
-  .quality-c .quality-label{color:#dc2626}
-  .quality-reason{font-size:12px;color:#374151}
-  /* Setup type pill */
-  .setup-pill{display:inline-block;padding:3px 10px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:.08em;margin-bottom:4px;background:#e8effe;color:#1a56db;border:1px solid rgba(26,86,219,.2)}
+  .quality-badge{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:800;color:#fff;flex-shrink:0}
+
   /* Bias */
-  .bias-box{background:#e8effe;border:1.5px solid rgba(26,86,219,.2);border-radius:12px;padding:14px 16px;margin-bottom:16px;display:flex;align-items:flex-start;gap:12px}
-  .bias-icon{width:32px;height:32px;border-radius:50%;background:#1a56db;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:15px}
-  .bias-label{color:#1a56db;font-size:10px;font-weight:800;letter-spacing:.1em;margin-bottom:4px}
-  .bias-text{color:#111827;font-size:13px;font-weight:600}
-  .bias-note{color:#6b7280;font-size:12px;margin-top:4px}
-  /* Levels */
-  .level-item{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 14px;margin-bottom:8px;border-radius:8px}
-  .level-res{background:#fef2f2;border:1px solid #fca5a5}
-  .level-sup{background:#ecfdf5;border:1px solid #6ee7b7}
-  .level-dot{width:8px;height:8px;border-radius:50%;margin-right:8px;flex-shrink:0;margin-top:3px}
-  .level-left{display:flex;align-items:flex-start}
-  .level-type-wrap{}
-  .level-type{font-size:12px;font-weight:700}
-  .level-strength{font-size:10px;color:#6b7280;margin-top:2px}
-  .level-price{font-family:monospace;font-size:14px;font-weight:800;color:#111827;white-space:nowrap;margin-left:8px;margin-top:1px}
+  .bias-box{background:#e8effe;border:1.5px solid rgba(26,86,219,.2);border-radius:12px;padding:12px 14px;margin-bottom:14px;display:flex;gap:10px}
+  .bias-icon{width:30px;height:30px;border-radius:50%;background:#1a56db;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:14px}
+
+  /* Zones */
+  .zone-item{display:flex;align-items:flex-start;justify-content:space-between;padding:10px 12px;margin-bottom:8px;border-radius:8px}
+  .zone-res{background:#fef2f2;border:1px solid #fca5a5}
+  .zone-sup{background:#ecfdf5;border:1px solid #6ee7b7}
+  .zone-dot{width:8px;height:8px;border-radius:50%;margin-right:8px;flex-shrink:0;margin-top:4px}
+  .zone-prices{font-family:monospace;font-size:13px;font-weight:800;text-align:right}
+  .zone-touches{font-size:10px;margin-top:2px;text-align:right}
+
   /* Scenarios */
-  .scenario{border-radius:10px;padding:14px 16px;margin-bottom:10px}
+  .scenario{border-radius:10px;padding:14px;margin-bottom:10px}
   .scenario.primary{background:#e8effe;border:1.5px solid rgba(26,86,219,.27);border-left:4px solid #1a56db}
-  .scenario.alternate{background:#f8faff;border:1.5px solid #dde3f0;border-left:4px solid #6b7280}
-  .scenario-hdr{display:flex;align-items:center;gap:8px;margin-bottom:8px}
-  .scenario-num{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
-  .scenario-label{font-size:11px;font-weight:700;letter-spacing:.08em}
-  .scenario-row{display:flex;justify-content:space-between;margin-bottom:6px}
-  .scenario-lbl{color:#6b7280;font-size:12px}
-  .scenario-val{font-family:monospace;font-size:14px;font-weight:800;color:#111827}
-  .scenario-conf{background:#fff;border-radius:6px;padding:8px 10px;border:1px solid #dde3f0;font-size:11px;color:#111827;margin-bottom:6px}
-  .scenario-conf span{color:#6b7280}
-  .scenario-note{color:#6b7280;font-size:11px;font-style:italic}
-  /* Trade card */
-  .trade-inner{border:1.5px solid #dde3f0;border-radius:12px;padding:18px;box-shadow:0 2px 12px rgba(26,86,219,.06)}
-  .trade-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .trade-label{display:flex;align-items:center;gap:8px;color:#1a56db;font-size:11px;font-weight:800;letter-spacing:.1em}
+  .scenario.alternate{background:#f8faff;border:1.5px solid #dde3f0;border-left:4px solid #9ca3af}
+  .scenario-num{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;color:#fff;flex-shrink:0}
+  .scenario-conf{background:#fff;border-radius:6px;padding:7px 10px;border:1px solid #dde3f0;font-size:11px;margin-bottom:6px}
+
+  /* Confirmation box */
+  .conf-box{background:#e8effe;border:1px solid rgba(26,86,219,.2);border-radius:10px;padding:14px;margin-bottom:14px}
+  .conf-option{background:#fff;border-radius:8px;padding:12px;margin-bottom:8px;border:1px solid #dde3f0}
+  .conf-option:last-child{margin-bottom:0}
+  .conf-opt-label{font-size:10px;font-weight:800;color:#1a56db;letter-spacing:.08em;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+  .conf-opt-text{font-size:12px;color:#111827;line-height:1.5}
+  .conf-opt-benefit{font-size:11px;color:#059669;margin-top:4px;font-style:italic}
+
+  /* Trade */
+  .trade-inner{border:1.5px solid #dde3f0;border-radius:12px;padding:16px}
+  .trade-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
   .pulse-dot{width:8px;height:8px;border-radius:50%;background:#1a56db;animation:pulse 1.5s infinite}
   @keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
   .dir-badge{border-radius:6px;padding:4px 12px;font-size:13px;font-weight:800}
   .dir-long{background:#ecfdf5;border:1.5px solid #6ee7b7;color:#059669}
   .dir-short{background:#fef2f2;border:1.5px solid #fca5a5;color:#dc2626}
-  .conf-bar{background:#e8effe;border-radius:8px;padding:10px 14px;margin-bottom:14px;border:1px solid rgba(26,86,219,.13);font-size:11px}
-  .conf-lbl{color:#6b7280;font-weight:600}
-  .conf-val{color:#1a56db;font-weight:700}
-  .trade-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
-  .tg-entry{background:#f8faff;border-radius:8px;padding:12px 14px;border:1px solid #dde3f0}
-  .tg-sl{background:#fef2f2;border-radius:8px;padding:12px 14px;border:1px solid #fca5a5}
-  .tg-label{font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:6px}
-  .tg-entry .tg-label{color:#6b7280}.tg-sl .tg-label{color:#dc2626}
+  .trade-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+  .tg-entry{background:#f8faff;border-radius:8px;padding:12px;border:1px solid #dde3f0}
+  .tg-sl{background:#fef2f2;border-radius:8px;padding:12px;border:1px solid #fca5a5}
+  .tg-label{font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:5px}
   .tg-val{font-family:monospace;font-size:17px;font-weight:800}
-  .tg-entry .tg-val{color:#111827}.tg-sl .tg-val{color:#dc2626}
-  .tp-label{color:#6b7280;font-size:10px;font-weight:700;letter-spacing:.1em;margin-bottom:8px}
-  .tp-row{display:flex;gap:8px;margin-bottom:12px}
-  .tp-item{background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:8px;padding:10px 12px;flex:1;text-align:center}
-  .tp-num{color:#059669;font-size:10px;font-weight:700;margin-bottom:4px}
-  .tp-price{color:#059669;font-family:monospace;font-size:14px;font-weight:800}
-  .rr-row{display:flex;justify-content:flex-end;margin-bottom:12px}
-  .rr-badge{border-radius:6px;padding:5px 14px;display:flex;align-items:center;gap:6px}
+  .tp-row{display:flex;gap:8px;margin-bottom:10px}
+  .tp-item{background:#ecfdf5;border:1.5px solid #6ee7b7;border-radius:8px;padding:10px;flex:1;text-align:center}
+  .tp-num{color:#059669;font-size:10px;font-weight:700;margin-bottom:3px}
+  .tp-price{color:#059669;font-family:monospace;font-size:13px;font-weight:800}
+  .rr-badge{border-radius:6px;padding:5px 14px;display:flex;align-items:center;gap:8px;display:inline-flex}
   .rr-valid{background:#ecfdf5;border:1px solid #6ee7b7}
   .rr-invalid{background:#fef2f2;border:1px solid #fca5a5}
-  .rr-lbl{color:#6b7280;font-size:11px;font-weight:600}
-  .rr-val-good{color:#059669;font-family:monospace;font-size:14px;font-weight:800}
-  .rr-val-bad{color:#dc2626;font-family:monospace;font-size:14px;font-weight:800}
-  /* Invalidation */
-  .invalid-bar{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 14px;font-size:11px;color:#dc2626;margin-top:10px}
-  .invalid-lbl{font-weight:700;margin-bottom:2px}
+  .invalid-bar{background:#fef2f2;border:1px solid #fca5a5;border-radius:8px;padding:10px 12px;font-size:11px;margin-top:10px}
+
+  /* Next step prompt */
+  .next-step-box{background:linear-gradient(135deg,#1a56db,#1340b5);border-radius:14px;padding:20px;margin-bottom:14px;text-align:center;color:#fff}
+  .next-step-title{font-size:14px;font-weight:800;margin-bottom:8px;letter-spacing:.05em}
+  .next-step-sub{font-size:12px;opacity:.85;margin-bottom:16px;line-height:1.5}
+  .btn-next-step{background:#fff;color:#1a56db;border:none;border-radius:10px;padding:12px 24px;font-size:13px;font-weight:800;letter-spacing:.06em}
+
   /* Warning */
-  .warning-box{background:#fffbeb;border:1px solid rgba(217,119,6,.27);border-radius:10px;padding:12px 16px;margin-bottom:16px;display:flex;gap:10px;align-items:flex-start;font-size:12px;font-weight:600;color:#d97706;line-height:1.6}
-  .disclaimer{background:#f8faff;border-radius:10px;padding:12px 16px;border:1px solid #dde3f0;margin-bottom:16px;font-size:11px;color:#6b7280;line-height:1.7}
-  .disclaimer strong{color:#374151}
-  .btn-new{width:100%;background:linear-gradient(135deg,#1a56db,#1340b5);border:none;color:#fff;border-radius:12px;padding:17px;font-size:14px;font-weight:800;letter-spacing:.1em;box-shadow:0 4px 20px rgba(26,86,219,.25)}
+  .warning-box{background:#fffbeb;border:1px solid rgba(217,119,6,.27);border-radius:10px;padding:12px 14px;margin-bottom:14px;display:flex;gap:10px;font-size:12px;font-weight:600;color:#d97706;line-height:1.6}
+  .disclaimer{background:#f8faff;border-radius:10px;padding:12px 14px;border:1px solid #dde3f0;margin-bottom:14px;font-size:11px;color:#6b7280;line-height:1.7}
+  .btn-new{width:100%;background:linear-gradient(135deg,#1a56db,#1340b5);border:none;color:#fff;border-radius:12px;padding:16px;font-size:14px;font-weight:800;letter-spacing:.1em;box-shadow:0 4px 20px rgba(26,86,219,.25)}
   .hidden{display:none!important}
 </style>
 </head>
@@ -138,13 +171,13 @@
 
 <div class="header">
   <div class="logo-wrap">
-    <svg width="38" height="38" viewBox="0 0 38 38">
-      <circle cx="19" cy="19" r="19" fill="#1a56db"/>
-      <path d="M11 25C11 19 15 15 19 15C23 15 27 19 27 25" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
-      <path d="M15 15C13 11 10 11 10 11C10 11 11 14 13 15" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <path d="M23 15C25 11 28 11 28 11C28 11 27 14 25 15" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
-      <circle cx="16.5" cy="18" r="1.5" fill="white"/>
-      <circle cx="21.5" cy="18" r="1.5" fill="white"/>
+    <svg width="36" height="36" viewBox="0 0 36 36">
+      <circle cx="18" cy="18" r="18" fill="#1a56db"/>
+      <path d="M10 24C10 18 14 14 18 14C22 14 26 18 26 24" stroke="white" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+      <path d="M14 14C12 10 9 10 9 10C9 10 10 13 12 14" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <path d="M22 14C24 10 27 10 27 10C27 10 26 13 24 14" stroke="white" stroke-width="2" stroke-linecap="round" fill="none"/>
+      <circle cx="15.5" cy="17" r="1.5" fill="white"/>
+      <circle cx="20.5" cy="17" r="1.5" fill="white"/>
     </svg>
     <div style="display:flex;flex-direction:column;gap:2px">
       <div class="brand"><span class="fx">FX</span><span class="bulls">BULLS</span></div>
@@ -155,30 +188,84 @@
 </div>
 
 <div class="body">
-  <div class="upload-zone" id="uploadZone">
-    <svg width="52" height="52" viewBox="0 0 52 52" style="margin:0 auto;display:block">
-      <circle cx="26" cy="26" r="26" fill="#e8effe"/>
-      <path d="M26 16v20M26 16l-8 8M26 16l8 8" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </svg>
-    <div class="upload-title">Upload Your Chart</div>
-    <div class="upload-sub">Drop a screenshot or tap to browse</div>
-    <div class="upload-hint">Any forex pair · Any timeframe · PNG · JPG</div>
-    <input type="file" id="fileInput" accept="image/*" style="display:none"/>
-  </div>
 
-  <div class="preview-wrap hidden" id="previewWrap">
-    <img id="previewImg" class="preview-img" alt="chart"/>
-    <div class="btn-row">
-      <button class="btn-change" id="btnChange">CHANGE</button>
-      <button class="btn-analyse" id="btnAnalyse">ANALYSE CHART</button>
+  <!-- Step indicator -->
+  <div class="steps" id="stepsBar">
+    <div class="step active" id="step1Indicator">
+      <div class="step-circle">1</div>
+      <div class="step-label">H4 ZONES</div>
+    </div>
+    <div class="step" id="step2Indicator">
+      <div class="step-circle">2</div>
+      <div class="step-label">ENTRY</div>
     </div>
   </div>
 
-  <div class="spinner-wrap hidden" id="spinnerWrap">
-    <div class="spinner"></div>
-    <div class="spinner-text">ANALYSING CHART...</div>
+  <!-- H4 zones memory bar (shown in step 2) -->
+  <div class="zones-bar hidden" id="zonesBar">
+    <div class="zones-bar-header">
+      <div class="zones-bar-title">📌 H4 ZONES LOADED</div>
+      <button class="zones-bar-clear" onclick="clearH4Zones()">✕ Clear & restart</button>
+    </div>
+    <div id="zonesPills"></div>
   </div>
 
+  <!-- TF Selector -->
+  <div class="tf-section" id="tfSection">
+    <div class="tf-title">SELECT TIMEFRAME</div>
+    <div class="tf-grid">
+      <div class="tf-btn" onclick="selectTF(this,'1M')">1M</div>
+      <div class="tf-btn" onclick="selectTF(this,'5M')">5M</div>
+      <div class="tf-btn" onclick="selectTF(this,'15M')">15M</div>
+      <div class="tf-btn" onclick="selectTF(this,'30M')">30M</div>
+      <div class="tf-btn" onclick="selectTF(this,'1H')">1H</div>
+      <div class="tf-btn" onclick="selectTF(this,'4H')">4H</div>
+      <div class="tf-btn" onclick="selectTF(this,'D1')">D1</div>
+      <div class="tf-btn" onclick="selectTF(this,'W1')">W1</div>
+    </div>
+    <div class="tf-mode" id="tfModeRow" style="display:none">
+      <button class="tf-mode-btn selected" id="modeZones" onclick="selectMode('zones')">
+        <span class="mode-icon">🗺️</span>
+        <span class="mode-label">MAP ZONES</span>
+        <span class="mode-desc">Identify major S&R zones for the session</span>
+      </button>
+      <button class="tf-mode-btn" id="modeEntry" onclick="selectMode('entry')">
+        <span class="mode-icon">🎯</span>
+        <span class="mode-label">FIND ENTRY</span>
+        <span class="mode-desc">Get precise entry using saved H4 zones</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Upload Zone -->
+  <div class="upload-zone hidden" id="uploadZone">
+    <svg width="48" height="48" viewBox="0 0 48 48" style="margin:0 auto;display:block">
+      <circle cx="24" cy="24" r="24" fill="#e8effe"/>
+      <path d="M24 14v20M24 14l-8 8M24 14l8 8" stroke="#1a56db" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+    <div class="upload-title" id="uploadTitle">Upload H4 Chart</div>
+    <div class="upload-sub" id="uploadSub">Drop a screenshot or tap to browse</div>
+    <div class="upload-hint">TradingView · MT4 · MT5 · PNG · JPG</div>
+    <div class="upload-hint" id="uploadRangeHint" style="color:#1a56db;font-weight:700;margin-top:4px"></div>
+    <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="loadFile(this.files[0])"/>
+  </div>
+
+  <!-- Preview -->
+  <div class="preview-wrap hidden" id="previewWrap">
+    <img id="previewImg" class="preview-img" alt="chart"/>
+    <div class="btn-row">
+      <button class="btn-change" onclick="resetUpload()">CHANGE</button>
+      <button class="btn-analyse" id="btnAnalyse" onclick="analyse()">ANALYSE CHART</button>
+    </div>
+  </div>
+
+  <!-- Spinner -->
+  <div class="spinner-wrap hidden" id="spinnerWrap">
+    <div class="spinner"></div>
+    <div class="spinner-text" id="spinnerText">ANALYSING CHART...</div>
+  </div>
+
+  <!-- Error -->
   <div class="error-box hidden" id="errorBox">
     <div class="error-title">⚠ Analysis Failed</div>
     <div class="error-msg" id="errorMsg"></div>
@@ -186,192 +273,588 @@
       <div class="raw-label">RAW RESPONSE:</div>
       <pre class="raw-pre" id="rawPre"></pre>
     </div>
-    <button class="btn-retry" id="btnRetry">TRY AGAIN</button>
+    <button class="btn-retry" onclick="retryAfterError()">TRY AGAIN</button>
   </div>
 
+  <!-- Results -->
   <div id="results" class="hidden"></div>
+
 </div>
 
 <script>
-let imageB64=null, imageMime="image/png", currentImg=null;
+// ── State ────────────────────────────────────────────────
+let imageB64 = null, imageMime = 'image/png', currentImg = null;
+let selectedTF = null, selectedMode = 'zones';
+let h4Zones = null; // stored from step 1
+let currentStep = 1; // 1 = zone mapping, 2 = entry finding
 
+// ── Utils ────────────────────────────────────────────────
 function detectMime(b64){
   try{
     const s=atob(b64.slice(0,12)),c=i=>s.charCodeAt(i);
-    if(c(0)===0x89&&c(1)===0x50)return"image/png";
-    if(c(0)===0xFF&&c(1)===0xD8)return"image/jpeg";
-    if(c(0)===0x47&&c(1)===0x49)return"image/gif";
-    if(c(0)===0x52&&c(1)===0x49)return"image/webp";
+    if(c(0)===0x89&&c(1)===0x50)return'image/png';
+    if(c(0)===0xFF&&c(1)===0xD8)return'image/jpeg';
   }catch{}
-  return"image/png";
+  return'image/png';
 }
-
 function pullJSON(txt){
-  const s=txt.indexOf("{"),e=txt.lastIndexOf("}");
+  const s=txt.indexOf('{'),e=txt.lastIndexOf('}');
   if(s<0||e<=s)return null;
   return JSON.parse(txt.slice(s,e+1));
 }
+const show=id=>document.getElementById(id).classList.remove('hidden');
+const hide=id=>document.getElementById(id).classList.add('hidden');
 
-const show=id=>document.getElementById(id).classList.remove("hidden");
-const hide=id=>document.getElementById(id).classList.add("hidden");
+// ── TF Selection ─────────────────────────────────────────
+function selectTF(el, tf){
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedTF = tf;
 
+  // Show mode selector only for lower TFs when H4 zones exist
+  const isHighTF = ['4H','D1','W1'].includes(tf);
+  const isLowTF = ['1M','5M','15M','30M','1H'].includes(tf);
+
+  if(isHighTF){
+    // Force zone mapping mode
+    selectedMode = 'zones';
+    document.getElementById('tfModeRow').style.display = 'none';
+    show('uploadZone');
+    updateUploadText();
+  } else if(isLowTF && h4Zones){
+    // Show mode selector — they can choose entry or zone mapping
+    document.getElementById('tfModeRow').style.display = 'flex';
+    // Sync visual state to whatever selectedMode actually is, to avoid the
+    // buttons showing a different mode than what will actually be sent
+    document.getElementById('modeZones').classList.toggle('selected', selectedMode==='zones');
+    document.getElementById('modeEntry').classList.toggle('selected', selectedMode==='entry');
+    show('uploadZone');
+    updateUploadText();
+  } else {
+    // No H4 zones saved yet — force zone mapping
+    selectedMode = 'zones';
+    document.getElementById('tfModeRow').style.display = 'none';
+    show('uploadZone');
+    updateUploadText();
+  }
+}
+
+function selectMode(mode){
+  selectedMode = mode;
+  document.getElementById('modeZones').classList.toggle('selected', mode==='zones');
+  document.getElementById('modeEntry').classList.toggle('selected', mode==='entry');
+  updateUploadText();
+}
+
+function updateUploadText(){
+  const isZoneMode = selectedMode === 'zones';
+  const tf = selectedTF || '';
+  document.getElementById('uploadTitle').textContent = isZoneMode
+    ? `Upload ${tf} Chart — Map Zones`
+    : `Upload ${tf} Chart — Find Entry`;
+  document.getElementById('uploadSub').textContent = isZoneMode
+    ? 'AI will identify major S&R zones for the session'
+    : 'AI will find precise entries using your saved H4 zones';
+
+  const idealRangeMap = {
+    '1M':'2-4 hours','5M':'12-24 hours','15M':'2-3 days','30M':'3-5 days',
+    '1H':'1-2 weeks','4H':'3-6 weeks','D1':'3-6 months','W1':'1-2 years'
+  };
+  const hintEl = document.getElementById('uploadRangeHint');
+  if(tf && idealRangeMap[tf]){
+    hintEl.textContent = `💡 Best results: show ${idealRangeMap[tf]} of price history on this chart`;
+  } else {
+    hintEl.textContent = '';
+  }
+}
+
+// ── File loading ─────────────────────────────────────────
 function loadFile(file){
-  if(!file?.type.startsWith("image/")){showError("Please upload a PNG or JPG.");return;}
+  if(!file?.type.startsWith('image/')){showError('Please upload a PNG or JPG.');return;}
   const fr=new FileReader();
   fr.onload=e=>{
     const data=e.target.result;
-    imageB64=data.split(",")[1];
+    imageB64=data.split(',')[1];
     imageMime=detectMime(imageB64);
     currentImg=data;
-    document.getElementById("previewImg").src=data;
-    hide("uploadZone");show("previewWrap");hide("errorBox");hide("results");
+    document.getElementById('previewImg').src=data;
+    hide('uploadZone');show('previewWrap');hide('errorBox');hide('results');
   };
   fr.readAsDataURL(file);
 }
 
-function reset(){
+function resetUpload(){
   imageB64=null;currentImg=null;
-  document.getElementById("fileInput").value="";
-  show("uploadZone");hide("previewWrap");hide("errorBox");hide("results");hide("spinnerWrap");
+  document.getElementById('fileInput').value='';
+  hide('previewWrap');show('uploadZone');hide('errorBox');hide('results');
 }
 
-function showError(msg,raw){
-  document.getElementById("errorMsg").textContent=msg;
-  if(raw){document.getElementById("rawPre").textContent=raw.slice(0,600);show("rawBox");}
-  else hide("rawBox");
-  show("errorBox");
+// ── H4 Zone memory ────────────────────────────────────────
+function saveH4Zones(zones){
+  h4Zones = zones;
+  renderZonesPills(zones);
+  show('zonesBar');
+  // Update step indicators
+  document.getElementById('step1Indicator').classList.remove('active');
+  document.getElementById('step1Indicator').classList.add('done');
+  document.getElementById('step1Indicator').querySelector('.step-circle').textContent = '✓';
+  document.getElementById('step2Indicator').classList.add('active');
+  currentStep = 2;
 }
 
-async function analyse(){
-  if(!imageB64)return;
-  hide("errorBox");hide("results");hide("previewWrap");show("spinnerWrap");
-  try{
-    const res=await fetch("/api/analyse",{
-      method:"POST",
-      headers:{"Content-Type":"application/json"},
-      body:JSON.stringify({imageBase64:imageB64,imageMime})
-    });
-    const data=await res.json();
-    hide("spinnerWrap");show("previewWrap");
-    if(!res.ok||data.error){showError(data.error||"Server error");return;}
-    const txt=data.text||"";
-    if(!txt){showError("Empty response");return;}
-    let parsed;
-    try{parsed=pullJSON(txt);}catch(e){showError("Parse error: "+e.message,txt);return;}
-    if(!parsed){showError("No JSON in response",txt);return;}
-    renderResults(parsed);
-  }catch(e){
-    hide("spinnerWrap");show("previewWrap");
-    showError("Network error: "+e.message);
+function renderZonesPills(zones){
+  const container = document.getElementById('zonesPills');
+  container.innerHTML = (zones||[]).map(z => {
+    const isRes = z.type === 'Resistance';
+    const price = z.topBoundary ? `${z.bottomBoundary} – ${z.topBoundary}` : z.price || '';
+    return `<span class="zone-pill ${isRes?'res':'sup'}">
+      ${isRes?'▼':'▲'} ${z.type}: ${price}
+    </span>`;
+  }).join('');
+}
+
+function clearH4Zones(){
+  h4Zones = null;
+  hide('zonesBar');
+  document.getElementById('step1Indicator').classList.add('active');
+  document.getElementById('step1Indicator').classList.remove('done');
+  document.getElementById('step1Indicator').querySelector('.step-circle').textContent = '1';
+  document.getElementById('step2Indicator').classList.remove('active');
+  currentStep = 1;
+  // Reset TF selector
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('tfModeRow').style.display='none';
+  selectedTF = null; selectedMode = 'zones';
+  hide('uploadZone');hide('previewWrap');hide('results');hide('errorBox');
+}
+
+// ── Build prompt ──────────────────────────────────────────
+function buildPrompt(){
+  const tf = selectedTF || 'unknown';
+  const isZoneMode = selectedMode === 'zones';
+  const isHighTF = ['4H','D1','W1'].includes(tf);
+
+  // Lower TF confirmation pairs
+  const lowerTF = {'1M':'1M','5M':'1M','15M':'5M','30M':'15M','1H':'15M','4H':'30M','D1':'1H','W1':'4H'}[tf] || tf;
+
+  // H4 zones context string
+  let zonesContext = '';
+  if(h4Zones && h4Zones.length > 0 && !isZoneMode){
+    const zonesList = h4Zones.map(z => {
+      const price = z.topBoundary ? `${z.bottomBoundary}–${z.topBoundary}` : z.price || '';
+      return `${z.type}: ${price} (${z.strength||''}${z.touches?' — '+z.touches+' touches':''})`;
+    }).join('\n');
+    zonesContext = `\n\nIMPORTANT — H4 MAJOR ZONES ALREADY IDENTIFIED:\nThe following zones were identified on the H4 chart. These are the ONLY zones you should consider for entries on this ${tf} chart. Do not identify new zones that are not near these H4 levels. Every entry scenario must be at or within 30 points of one of these H4 zones:\n${zonesList}\n`;
+  }
+
+  const dataRangeMap = {
+    '1M':'2-4 hours of price action',
+    '5M':'12-24 hours of price action',
+    '15M':'2-3 days of price action',
+    '30M':'3-5 days of price action',
+    '1H':'1-2 weeks of price action',
+    '4H':'3-6 weeks of price action',
+    'D1':'3-6 months of price action',
+    'W1':'1-2 years of price action'
+  };
+  const dataRangeTable = Object.entries(dataRangeMap).map(([k,v])=>`- ${k} chart: ideal range is ${v}`).join('\n');
+  const dataRangeGuide = `Ideal data range by timeframe:\n${dataRangeTable}\nFor THIS chart (${tf}), the ideal range is: ${dataRangeMap[tf] || 'an appropriate amount of history for this timeframe'}.`;
+
+  if(isZoneMode || isHighTF){
+    return `You are the official AI chart analyst for FX BULLS. This is a ZONE MAPPING session on the ${tf} timeframe.
+
+Your job is to identify the major Support and Resistance zones that will be used as the foundation for lower timeframe entries.
+
+ZONE DRAWING RULES:
+- Draw zones as BANDS with a top and bottom boundary
+- Use CANDLE BODY closes only — ignore wicks completely
+- Zone width maximum: 30-80 points (gold/indices), 10-30 pips (forex)
+- Only mark zones where price has VISIBLY reacted — bounced, rejected, or consolidated
+- Count exact number of touches — only reactions where price moved away strongly
+- 1 touch = weak (only if reaction was massive), 2 = moderate, 3+ = strong, 4+ = weakening
+- Mark confluence: round numbers, zones appearing on multiple timeframes
+
+TREND: Identify overall trend from price structure (higher highs/lows = uptrend, lower highs/lows = downtrend, sideways = ranging)
+
+DATA RANGE CHECK:
+${dataRangeGuide}
+Look at the x-axis date labels and calculate the actual range shown on this chart. Report this in chartRangeUsed. If the chart is zoomed in too far (not enough history to judge zone strength) or zoomed out too far (too much noise, hard to see precise levels), say so clearly and tell the user how to adjust before their next upload.
+
+After identifying zones, tell the user:
+1. The major zones to watch
+2. The overall bias
+3. Exactly which zones to look for entries at on their lower timeframe
+4. What to do next — e.g. "Now drop to the 15M or 30M and wait for price to reach the resistance zone at X–Y before looking for a Bearish Engulfing"
+
+OUTPUT: Respond with ONLY a raw JSON object. No markdown. No backticks. Start with { end with }.
+
+{
+  "instrument": "XAUUSD",
+  "timeframe": "${tf}",
+  "trend": "DOWNTREND",
+  "trendNote": "Clear lower highs and lower lows across the full chart",
+  "sessionBias": "BEARISH — only look for SHORT setups on lower timeframes at resistance zones",
+  "qualityScore": "A",
+  "qualityReason": "Multiple clean zones with 3+ touches, clear trend, strong reactions",
+  "zones": [
+    {"type":"Resistance","topBoundary":"4345","bottomBoundary":"4320","touches":3,"strength":"Strong","note":"Crash origin zone — first retest. Strongest level on chart."},
+    {"type":"Resistance","topBoundary":"4395","bottomBoundary":"4375","touches":2,"strength":"Moderate","note":"Secondary resistance — only if price breaks above 4345"},
+    {"type":"Support","topBoundary":"4300","bottomBoundary":"4285","touches":3,"strength":"Strong","note":"Multiple bounces here. First target after short entry."},
+    {"type":"Support","topBoundary":"4215","bottomBoundary":"4200","touches":2,"strength":"Moderate","note":"Deeper support — TP2 target"}
+  ],
+  "keyZonesForEntry": [
+    {"zone":"4320–4345","type":"Resistance","action":"SHORT","note":"Primary entry zone — wait for Bearish Engulfing on 15M or 30M"},
+    {"zone":"4285–4300","type":"Support","action":"LONG","note":"If price drops here, look for Bullish Engulfing for a long entry"}
+  ],
+  "nextStep": "Drop to the 15M or 30M chart. Upload it and select FIND ENTRY mode. Wait for price to reach the 4320–4345 resistance zone before looking for your Bearish Engulfing confirmation.",
+  "chartRangeUsed": "This chart showed roughly 5 days of price action, which is appropriate for ${tf}.",
+  "warning": "Do not enter on this ${tf} chart. Use these zones as your roadmap only. All entries happen on the lower timeframe with confirmation."
+}`;
+  } else {
+    // Entry mode prompt
+    return `You are the official AI chart analyst for FX BULLS. This is an ENTRY FINDING session on the ${tf} timeframe.
+${zonesContext}
+ENTRY RULES:
+1. ONLY give entry setups at or near the H4 zones listed above. Do not create new unrelated zones.
+2. Draw tight entry zones — body to body, max 30-50 points wide (gold/indices) or 10-15 pips (forex)
+3. Identify the exact setup type: "Retest" (broke through level, now retesting), "Zone Touch" (approaching known level), "Fakeout/Sweep" (spike through then reversal)
+4. CONFIRMATION — two options always:
+   - Primary: ${tf} Bearish/Bullish Engulfing or candle close above/below zone
+   - Secondary: Drop to ${lowerTF} for earlier entry with tighter SL — same zone, lower TF trigger
+5. STOP LOSS: Just outside the zone boundary — 10-15 points buffer (gold/indices), 3-5 pips (forex). Keep it TIGHT.
+6. TAKE PROFIT — TP1 IS RULE-BASED, NOT ZONE-BASED:
+   - First calculate the SL distance (Entry to SL).
+   - TP1 = Entry + (2 × SL distance) in the trade direction. This is a FIXED 1:2 R:R target — always use this exact math for TP1, regardless of where the nearest zone sits.
+   - Do NOT place TP1 at "the next zone" if that zone is closer or further than the 1:2 distance. The 1:2 R:R rule always wins over zone proximity for TP1.
+   - TP2 = the next real H4/structure zone beyond TP1 in the trade direction (this can be a larger R:R, e.g. 1:3 or more — that's fine for TP2/TP3, only TP1 is fixed at 1:2).
+   - TP3 = the H4 zone beyond TP2, if one exists.
+   - Example: SL distance is 38 points → TP1 must be exactly 76 points from entry (1:2), not wherever a nearby zone happens to be.
+7. RISK:REWARD: The rr field reported should be the TP1 ratio, which by rule 6 is always 1:2. Mark rrValid=false only if the SL is so wide that even 1:2 would overshoot all visible structure — flag this case explicitly rather than silently fixing it.
+8. QUALITY SCORE: A (3+ touches, retest, confluence, 1:2+ RR), B (2 touches, zone touch), C (skip)
+9. MOVE STATUS: AT_ZONE (price inside zone now), WAIT_FOR_RETRACEMENT (price away from zone), NO_SETUP (no valid setup)
+10. Always state INVALIDATION — exact price where setup is cancelled
+11. Always assess the DATA RANGE visible on the chart and report it in chartRangeUsed
+
+DATA RANGE GUIDANCE FOR ${tf}:
+${dataRangeGuide}
+Look at the x-axis date labels on the chart and calculate the actual range shown. Compare to the ideal above. If too zoomed in or too zoomed out, say so clearly in chartRangeUsed and tell the user exactly how to adjust.
+
+OUTPUT: Respond with ONLY a raw JSON object. No markdown. No backticks. Start with { end with }.
+
+{
+  "instrument": "XAUUSD",
+  "timeframe": "${tf}",
+  "chartRangeUsed": "This chart shows roughly 3 days of price action, which fits the ideal range for ${tf}.",
+  "trend": "DOWNTREND",
+  "trendNote": "Lower highs and lower lows on ${tf}. Aligned with H4 downtrend.",
+  "moveStatus": "AT_ZONE",
+  "moveStatusNote": "Price is inside the H4 resistance zone 4320–4345 right now.",
+  "qualityScore": "A",
+  "qualityReason": "First retest of H4 crash origin zone. 3 touches. Round number confluence. R:R 1:3.2.",
+  "zones": [
+    {"type":"Resistance","topBoundary":"4345","bottomBoundary":"4320","touches":3,"strength":"Strong","note":"H4 zone — crash origin. First retest. Strongest level."},
+    {"type":"Support","topBoundary":"4300","bottomBoundary":"4285","touches":3,"strength":"Strong","note":"H4 support — first TP target"}
+  ],
+  "scenarios": [
+    {
+      "number": 1,
+      "type": "SHORT",
+      "setupType": "Retest",
+      "zoneTop": "4345",
+      "zoneBottom": "4320",
+      "entry": "4320",
+      "confirmation": "Bearish Engulfing on the ${tf} — full body must engulf previous candle body",
+      "confirmationSecondary": "Drop to ${lowerTF} when price enters zone. Wait for Bearish Engulfing on ${lowerTF} for tighter SL and earlier entry.",
+      "confirmationSecondaryBenefit": "Earlier entry, tighter SL, better R:R. Zone defined by ${tf}, trigger on ${lowerTF}.",
+      "note": "Primary — H4 crash origin retest. Highest probability setup.",
+      "confluences": ["H4 zone alignment", "3 touches", "First retest after break", "Round number nearby"]
+    },
+    {
+      "number": 2,
+      "type": "LONG",
+      "setupType": "Zone Touch",
+      "zoneTop": "4300",
+      "zoneBottom": "4285",
+      "entry": "4300",
+      "confirmation": "Bullish Engulfing on the ${tf} off 4285–4300 support zone",
+      "confirmationSecondary": "Drop to ${lowerTF} when price enters zone. Wait for Bullish Engulfing on ${lowerTF}.",
+      "confirmationSecondaryBenefit": "Tighter SL, better R:R on the long side.",
+      "note": "Alternate — if Scenario 1 triggers and price drops to this H4 support.",
+      "confluences": ["H4 support zone", "3 touches"]
+    }
+  ],
+  "trade": {
+    "direction": "SHORT",
+    "entry": "4320",
+    "sl": "4358",
+    "slNote": "Above zone top 4345 plus 13 point buffer. SL distance is 38 points.",
+    "targets": ["4244","4200","4150"],
+    "rr": "1:2",
+    "rrValid": true,
+    "tp1Note": "TP1 fixed at 1:2 R:R — 76 points from entry (2x the 38 point SL distance), not zone-based.",
+    "confirmation": "Bearish Engulfing on the ${tf} — full body close required",
+    "invalidIf": "Full candle closes ABOVE 4358 on the ${tf} — setup cancelled"
+  },
+  "bias": "BEARISH — aligned with H4 downtrend. Short setups only at H4 resistance.",
+  "warning": "Price is inside the zone now. Wait for full confirmation candle to close before entering. Do not enter on a wick. No trades 30 min before major news."
+}`;
   }
 }
 
-function renderResults(r){
-  const trendColor=r.trend==="UPTREND"?"#059669":r.trend==="DOWNTREND"?"#dc2626":"#d97706";
-  const isLong=["LONG","BUY"].includes((r.trade?.direction||"").toUpperCase());
-  const rrValid=r.trade?.rrValid!==false;
-  const qScore=(r.qualityScore||"B").toUpperCase();
-  const qClass=qScore==="A"?"quality-a":qScore==="C"?"quality-c":"quality-b";
-  const qLabel=qScore==="A"?"A-GRADE SETUP":qScore==="C"?"C-GRADE — WEAK":"B-GRADE SETUP";
+// ── Analyse ───────────────────────────────────────────────
+async function analyse(){
+  if(!imageB64||!selectedTF){
+    if(!selectedTF){alert('Please select a timeframe first.');}
+    return;
+  }
+  hide('errorBox');hide('results');hide('previewWrap');show('spinnerWrap');
+  document.getElementById('spinnerText').textContent = selectedMode==='zones' ? 'MAPPING ZONES...' : 'FINDING ENTRY...';
 
-  const levels=(r.levels||[]).map(l=>{
-    const res=l.type==="Resistance";
-    return`<div class="level-item ${res?'level-res':'level-sup'}">
-      <div class="level-left">
-        <div class="level-dot" style="background:${res?'#dc2626':'#059669'}"></div>
-        <div class="level-type-wrap">
-          <div class="level-type" style="color:${res?'#dc2626':'#059669'}">${l.type.toUpperCase()}</div>
-          ${l.strength?`<div class="level-strength">${l.strength}</div>`:''}
+  try{
+    const res = await fetch('/api/analyse',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({imageBase64:imageB64, imageMime, prompt: buildPrompt()})
+    });
+    const data = await res.json();
+    hide('spinnerWrap');show('previewWrap');
+    if(!res.ok||data.error){showError(data.error||'Server error');return;}
+    const txt = data.text||'';
+    if(!txt){showError('Empty response');return;}
+    let parsed;
+    try{parsed=pullJSON(txt);}catch(e){showError('Parse error: '+e.message,txt);return;}
+    if(!parsed){showError('No JSON in response',txt);return;}
+
+    // If this was a zone mapping session, save the zones
+    if(selectedMode==='zones'||['4H','D1','W1'].includes(selectedTF)){
+      if(parsed.zones&&parsed.zones.length>0){
+        saveH4Zones(parsed.zones);
+      }
+    }
+
+    renderResults(parsed);
+  }catch(e){
+    hide('spinnerWrap');show('previewWrap');
+    showError('Network error: '+e.message);
+  }
+}
+
+function showError(msg,raw){
+  document.getElementById('errorMsg').textContent=msg;
+  if(raw){document.getElementById('rawPre').textContent=raw.slice(0,600);show('rawBox');}
+  else hide('rawBox');
+  show('errorBox');
+}
+
+function retryAfterError(){
+  hide('errorBox');show('previewWrap');
+}
+
+// ── Render results ────────────────────────────────────────
+function renderResults(r){
+  const isZoneMode = selectedMode==='zones'||['4H','D1','W1'].includes(selectedTF);
+  const trendColor = r.trend==='UPTREND'?'#059669':r.trend==='DOWNTREND'?'#dc2626':'#d97706';
+  const isLong = ['LONG','BUY'].includes((r.trade?.direction||'').toUpperCase());
+  const rrValid = r.trade?.rrValid!==false;
+  const q = (r.qualityScore||'B').toUpperCase();
+  const qClass = q==='A'?'quality-a':q==='C'?'quality-c':'quality-b';
+  const qColor = q==='A'?'#059669':q==='C'?'#dc2626':'#d97706';
+  const qLabel = q==='A'?'A-GRADE — STRONG':q==='C'?'C-GRADE — SKIP':'B-GRADE — MODERATE';
+
+  const zones = (r.zones||[]).map(z=>{
+    const res = z.type==='Resistance';
+    const priceDisplay = z.topBoundary?`${z.bottomBoundary} – ${z.topBoundary}`:z.price||'';
+    const strengthColor = z.strength==='Strong'?'#059669':z.strength==='Weakening'?'#dc2626':'#d97706';
+    return `<div class="zone-item ${res?'zone-res':'zone-sup'}">
+      <div style="display:flex;align-items:flex-start;gap:8px">
+        <div class="zone-dot" style="background:${res?'#dc2626':'#059669'}"></div>
+        <div>
+          <div style="font-size:12px;font-weight:700;color:${res?'#dc2626':'#059669'}">${(z.type||'ZONE').toUpperCase()}</div>
+          ${z.note?`<div style="font-size:10px;color:#6b7280;margin-top:2px">${z.note}</div>`:''}
         </div>
       </div>
-      <div class="level-price">${l.price}</div>
-    </div>`;
-  }).join("");
-
-  const scenarios=(r.scenarios||[]).map((s,i)=>`
-    <div class="scenario ${i===0?'primary':'alternate'}">
-      <div class="scenario-hdr">
-        <div class="scenario-num" style="background:${i===0?'#1a56db':'#6b7280'}">${s.number}</div>
-        <span class="scenario-label" style="color:${i===0?'#1a56db':'#6b7280'}">SCENARIO ${s.number} — ${i===0?'PRIMARY':'ALTERNATE'}</span>
+      <div style="text-align:right">
+        <div class="zone-prices" style="color:${res?'#dc2626':'#059669'}">${priceDisplay}</div>
+        ${z.touches?`<div class="zone-touches" style="color:${strengthColor}">${z.touches} touch${z.touches>1?'es':''} — ${z.strength||''}</div>`:''}
       </div>
-      ${s.setupType?`<div><span class="setup-pill">${s.setupType}</span></div>`:''}
-      <div class="scenario-row"><span class="scenario-lbl">Entry</span><span class="scenario-val">${s.entry}</span></div>
-      <div class="scenario-conf"><span>Wait for: </span>${s.confirmation}</div>
-      ${s.note?`<div class="scenario-note">${s.note}</div>`:''}
-    </div>`).join("");
+    </div>`;
+  }).join('');
 
-  const tps=(r.trade?.targets||[]).map((tp,i)=>`
-    <div class="tp-item"><div class="tp-num">TP${i+1}</div><div class="tp-price">${tp}</div></div>`).join("");
+  const scenarios = (r.scenarios||[]).map((s,i)=>`
+    <div class="scenario ${i===0?'primary':'alternate'}">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:10px">
+        <div class="scenario-num" style="background:${i===0?'#1a56db':'#9ca3af'}">${s.number}</div>
+        <div>
+          <span style="font-size:11px;font-weight:700;color:${i===0?'#1a56db':'#6b7280'}">SCENARIO ${s.number} — ${i===0?'PRIMARY':'ALTERNATE'}</span>
+          ${s.setupType?`<span style="margin-left:6px;background:#e8effe;color:#1a56db;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:600">${s.setupType}</span>`:''}
+        </div>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+        <span style="font-size:12px;color:#6b7280">Entry</span>
+        <span style="font-family:monospace;font-size:14px;font-weight:800;color:#111827">${s.entry}</span>
+      </div>
+      <div class="scenario-conf"><span style="color:#6b7280">Wait for: </span>${s.confirmation}</div>
+      ${s.confirmationSecondary?`<div style="background:#ecfdf5;border:1px solid #6ee7b7;border-radius:6px;padding:8px 10px;margin-top:6px;font-size:11px">
+        <div style="color:#059669;font-weight:700;margin-bottom:3px">⚡ EARLY ENTRY (lower TF):</div>
+        <div style="color:#111827">${s.confirmationSecondary}</div>
+        ${s.confirmationSecondaryBenefit?`<div style="color:#059669;font-style:italic;margin-top:3px">${s.confirmationSecondaryBenefit}</div>`:''}
+      </div>`:''}
+      ${s.note?`<div style="font-size:11px;color:#6b7280;margin-top:6px;font-style:italic">${s.note}</div>`:''}
+      ${s.confluences?.length?`<div style="margin-top:8px;display:flex;flex-wrap:wrap;gap:4px">${s.confluences.map(c=>`<span style="background:#e8effe;color:#1a56db;border-radius:10px;padding:2px 8px;font-size:10px;font-weight:600">${c}</span>`).join('')}</div>`:''}
+    </div>`).join('');
 
-  document.getElementById("results").innerHTML=`
+  const tps = (r.trade?.targets||[]).map((tp,i)=>`
+    <div class="tp-item"><div class="tp-num">TP${i+1}${i===0?' · 1:2 fixed':''}</div><div class="tp-price">${tp}</div></div>`).join('');
+
+  // Key zones for entry (shown in zone mode)
+  const keyZones = (r.keyZonesForEntry||[]).map(kz=>`
+    <div style="background:${kz.type==='Resistance'?'#fef2f2':'#ecfdf5'};border:1px solid ${kz.type==='Resistance'?'#fca5a5':'#6ee7b7'};border-radius:8px;padding:10px 12px;margin-bottom:8px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+        <span style="font-size:11px;font-weight:700;color:${kz.type==='Resistance'?'#dc2626':'#059669'}">${kz.action} at ${kz.type}</span>
+        <span style="font-family:monospace;font-size:13px;font-weight:800;color:#111827">${kz.zone}</span>
+      </div>
+      <div style="font-size:11px;color:#6b7280">${kz.note||''}</div>
+    </div>`).join('');
+
+  document.getElementById('results').innerHTML = `
     <div class="thumb-wrap">
       <img class="thumb-img" src="${currentImg}" alt="chart"/>
       <div class="thumb-badge">
         ${r.instrument?`<div class="badge-dark">${r.instrument}</div>`:''}
         ${r.timeframe?`<div class="badge-tf">${r.timeframe}</div>`:''}
+        <div class="badge-tf" style="background:rgba(26,86,219,.7);color:#fff">${isZoneMode?'ZONE MAP':'ENTRY'}</div>
       </div>
       ${r.trend?`<div class="trend-badge" style="background:${trendColor}">${r.trend}</div>`:''}
     </div>
 
-    <!-- Quality Score -->
+    ${r.chartRangeUsed?`<div style="background:#f8faff;border:1px solid #dde3f0;border-radius:8px;padding:9px 12px;margin-bottom:14px;font-size:11px;color:#374151;display:flex;gap:8px;align-items:flex-start">
+      <span>📏</span><span>${r.chartRangeUsed}</span>
+    </div>`:''}
+
     <div class="quality-row ${qClass}">
-      <div class="quality-badge">${qScore}</div>
+      <div class="quality-badge" style="background:${qColor}">${q}</div>
       <div>
-        <div class="quality-label">${qLabel}</div>
-        ${r.qualityReason?`<div class="quality-reason">${r.qualityReason}</div>`:''}
+        <div style="font-size:11px;font-weight:700;color:${qColor};letter-spacing:.06em">${qLabel}</div>
+        ${r.qualityReason?`<div style="font-size:12px;color:#6b7280;margin-top:3px">${r.qualityReason}</div>`:''}
       </div>
     </div>
 
-    <!-- Bias -->
-    ${r.bias?`<div class="bias-box">
+    ${r.moveStatus?(()=>{
+      const msMap = {
+        'AT_ZONE': {color:'#1a56db',bg:'#e8effe',border:'rgba(26,86,219,.25)',label:'⚡ PRICE AT ZONE NOW',icon:'⚡'},
+        'WAIT_FOR_RETRACEMENT': {color:'#d97706',bg:'#fffbeb',border:'rgba(217,119,6,.25)',label:'⏳ WAIT FOR RETRACEMENT',icon:'⏳'},
+        'NO_SETUP': {color:'#6b7280',bg:'#f3f4f6',border:'#dde3f0',label:'🚫 NO VALID SETUP RIGHT NOW',icon:'🚫'}
+      };
+      const ms = msMap[r.moveStatus] || {color:'#6b7280',bg:'#f3f4f6',border:'#dde3f0',label:r.moveStatus,icon:'ℹ️'};
+      return `<div style="background:${ms.bg};border:1.5px solid ${ms.border};border-radius:10px;padding:10px 14px;margin-bottom:14px">
+        <div style="color:${ms.color};font-size:11px;font-weight:800;letter-spacing:.06em;margin-bottom:3px">${ms.label}</div>
+        ${r.moveStatusNote?`<div style="color:#374151;font-size:12px">${r.moveStatusNote}</div>`:''}
+      </div>`;
+    })():''}
+
+    ${r.sessionBias||r.bias?`<div class="bias-box">
       <div class="bias-icon">📊</div>
       <div>
-        <div class="bias-label">MARKET BIAS</div>
-        <div class="bias-text">${r.bias}</div>
-        ${r.trendNote?`<div class="bias-note">${r.trendNote}</div>`:''}
+        <div style="color:#1a56db;font-size:10px;font-weight:800;letter-spacing:.1em;margin-bottom:4px">${isZoneMode?'SESSION BIAS':'MARKET BIAS'}</div>
+        <div style="color:#111827;font-size:13px;font-weight:600">${r.sessionBias||r.bias}</div>
+        ${r.trendNote?`<div style="color:#6b7280;font-size:12px;margin-top:3px">${r.trendNote}</div>`:''}
       </div>
     </div>`:''}
 
-    ${r.scenarios?.length?`<div class="card"><div class="section-hdr">🎯 SCENARIOS</div>${scenarios}</div>`:''}
-    ${r.levels?.length?`<div class="card"><div class="section-hdr">📍 KEY LEVELS</div>${levels}</div>`:''}
+    ${zones?`<div class="card"><div class="section-hdr">📍 ${isZoneMode?'MAJOR S&R ZONES':'KEY LEVELS'}</div>${zones}</div>`:''}
 
-    ${r.trade?`<div class="card">
+    ${isZoneMode&&keyZones?`<div class="card"><div class="section-hdr">🎯 ZONES TO WATCH FOR ENTRIES</div>${keyZones}</div>`:''}
+
+    ${!isZoneMode&&scenarios?`<div class="card"><div class="section-hdr">🎯 SCENARIOS</div>${scenarios}</div>`:''}
+
+    ${!isZoneMode&&r.trade?`<div class="card">
       <div class="section-hdr">💼 TRADE SETUP</div>
       <div class="trade-inner">
         <div class="trade-top">
-          <div class="trade-label"><div class="pulse-dot"></div>POSSIBLE TRADE IDEA</div>
+          <div style="display:flex;align-items:center;gap:8px;color:#1a56db;font-size:11px;font-weight:800;letter-spacing:.1em">
+            <div class="pulse-dot"></div>POSSIBLE TRADE IDEA
+          </div>
           <div class="dir-badge ${isLong?'dir-long':'dir-short'}">${(r.trade.direction||'').toUpperCase()}</div>
         </div>
-        ${r.trade.confirmation?`<div class="conf-bar"><span class="conf-lbl">WAIT FOR CONFIRMATION: </span><span class="conf-val">${r.trade.confirmation}</span></div>`:''}
+        ${r.trade.confirmation?`<div style="background:#e8effe;border-radius:8px;padding:10px 12px;margin-bottom:12px;font-size:11px;border:1px solid rgba(26,86,219,.15)">
+          <span style="color:#6b7280;font-weight:600">WAIT FOR CONFIRMATION: </span>
+          <span style="color:#1a56db;font-weight:700">${r.trade.confirmation}</span>
+        </div>`:''}
         <div class="trade-grid">
-          <div class="tg-entry"><div class="tg-label">ENTRY</div><div class="tg-val">${r.trade.entry||''}</div></div>
-          <div class="tg-sl"><div class="tg-label">STOP LOSS</div><div class="tg-val">${r.trade.sl||''}</div></div>
+          <div class="tg-entry"><div class="tg-label" style="color:#6b7280">ENTRY</div><div class="tg-val" style="color:#111827">${r.trade.entry||''}</div></div>
+          <div class="tg-sl"><div class="tg-label" style="color:#dc2626">STOP LOSS</div><div class="tg-val" style="color:#dc2626">${r.trade.sl||''}</div></div>
         </div>
-        ${tps?`<div class="tp-label">TAKE PROFIT TARGETS</div><div class="tp-row">${tps}</div>`:''}
-        ${r.trade.rr?`<div class="rr-row"><div class="rr-badge ${rrValid?'rr-valid':'rr-invalid'}">
-          <span class="rr-lbl">RISK:REWARD</span>
-          <span class="${rrValid?'rr-val-good':'rr-val-bad'}">${r.trade.rr} ${rrValid?'✓':'✗ SKIP'}</span>
-        </div></div>`:''}
-        ${r.trade.invalidIf?`<div class="invalid-bar"><div class="invalid-lbl">❌ SETUP CANCELLED IF:</div>${r.trade.invalidIf}</div>`:''}
+        ${r.trade.slNote?`<div style="font-size:11px;color:#6b7280;margin-bottom:12px;font-style:italic">📌 ${r.trade.slNote}</div>`:''}
+        ${tps?`<div style="font-size:10px;font-weight:700;color:#6b7280;letter-spacing:.1em;margin-bottom:8px">TAKE PROFIT TARGETS</div>
+        <div class="tp-row">${tps}</div>`:''}
+        ${r.trade.tp1Note?`<div style="font-size:11px;color:#059669;margin-bottom:10px;font-style:italic">📐 ${r.trade.tp1Note}</div>`:''}
+        ${r.trade.rr?`<div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+          <div class="rr-badge ${rrValid?'rr-valid':'rr-invalid'}">
+            <span style="color:#6b7280;font-size:11px;font-weight:600">R:R</span>
+            <span style="font-family:monospace;font-size:14px;font-weight:800;color:${rrValid?'#059669':'#dc2626'}">${r.trade.rr} ${rrValid?'✓':'✗ SKIP'}</span>
+          </div>
+        </div>`:''}
+        ${r.trade.invalidIf?`<div class="invalid-bar"><span style="color:#dc2626;font-weight:700">Setup cancelled if: </span><span style="color:#dc2626">${r.trade.invalidIf}</span></div>`:''}
       </div>
     </div>`:''}
 
     ${r.warning?`<div class="warning-box"><span>⚠️</span><span>${r.warning}</span></div>`:''}
 
-    <div class="disclaimer"><strong>Risk Disclosure: </strong>Trading forex and leveraged products carries substantial risk. This tool is for educational purposes only and does not constitute financial advice. FX BULLS accepts no liability for trading decisions made using this tool.</div>
-    <button class="btn-new" onclick="reset()">ANALYSE NEW CHART</button>`;
+    ${isZoneMode&&r.nextStep?`<div class="next-step-box">
+      <div class="next-step-title">✅ ZONES SAVED — NEXT STEP</div>
+      <div class="next-step-sub">${r.nextStep}</div>
+      <button class="btn-next-step" onclick="goToEntryMode()">FIND ENTRY NOW →</button>
+    </div>`:''}
 
-  hide("previewWrap");show("results");window.scrollTo(0,0);
+    <div class="disclaimer"><strong>Risk Disclosure: </strong>Trading forex and leveraged products carries substantial risk. For educational purposes only. FX BULLS accepts no liability for trading decisions made using this tool.</div>
+    <button class="btn-new" onclick="newAnalysis()">ANALYSE NEW CHART</button>`;
+
+  hide('previewWrap');show('results');window.scrollTo(0,0);
 }
 
-document.getElementById("uploadZone").addEventListener("click",()=>document.getElementById("fileInput").click());
-document.getElementById("uploadZone").addEventListener("dragover",e=>{e.preventDefault();e.currentTarget.classList.add("drag")});
-document.getElementById("uploadZone").addEventListener("dragleave",e=>e.currentTarget.classList.remove("drag"));
-document.getElementById("uploadZone").addEventListener("drop",e=>{e.preventDefault();e.currentTarget.classList.remove("drag");loadFile(e.dataTransfer.files[0])});
-document.getElementById("fileInput").addEventListener("change",e=>loadFile(e.target.files[0]));
-document.getElementById("btnChange").addEventListener("click",reset);
-document.getElementById("btnAnalyse").addEventListener("click",analyse);
-document.getElementById("btnRetry").addEventListener("click",()=>{hide("errorBox");show("previewWrap")});
+function goToEntryMode(){
+  // Reset upload but keep H4 zones
+  imageB64=null;currentImg=null;
+  document.getElementById('fileInput').value='';
+  hide('results');
+  // Auto-select entry mode
+  selectedMode='entry';
+  selectedTF=null;
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('selected'));
+  document.getElementById('tfModeRow').style.display='none';
+  hide('uploadZone');
+  show('tfSection');
+  window.scrollTo(0,0);
+}
+
+function newAnalysis(){
+  // Keep H4 zones if they exist, just reset upload
+  imageB64=null;currentImg=null;
+  document.getElementById('fileInput').value='';
+  hide('results');hide('errorBox');hide('previewWrap');
+  document.querySelectorAll('.tf-btn').forEach(b=>b.classList.remove('selected'));
+  selectedTF=null;
+  if(h4Zones){
+    // Stay in entry mode, show TF selector with mode options
+    document.getElementById('tfModeRow').style.display='flex';
+    document.getElementById('modeZones').classList.toggle('selected', selectedMode==='zones');
+    document.getElementById('modeEntry').classList.toggle('selected', selectedMode==='entry');
+  } else {
+    document.getElementById('tfModeRow').style.display='none';
+  }
+  hide('uploadZone');
+  show('tfSection');
+  window.scrollTo(0,0);
+}
+
+// File input via upload zone click
+document.addEventListener('DOMContentLoaded',()=>{
+  const zone = document.getElementById('uploadZone');
+  zone.addEventListener('click',()=>document.getElementById('fileInput').click());
+  zone.addEventListener('dragover',e=>{e.preventDefault();zone.classList.add('drag')});
+  zone.addEventListener('dragleave',()=>zone.classList.remove('drag'));
+  zone.addEventListener('drop',e=>{e.preventDefault();zone.classList.remove('drag');loadFile(e.dataTransfer.files[0])});
+});
 </script>
 </body>
 </html>
