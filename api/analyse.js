@@ -32,7 +32,7 @@ export default async function handler(req) {
         'Content-Type': 'application/json',
         'Authorization': `Bearer ${apiKey}`,
         'HTTP-Referer': 'https://fxbulls.vercel.app',
-        'X-Title': 'FX BULLS AI Chart Analyser',
+        'X-Title': 'FX BULLS Technical Analysis Research Assistant',
       },
       body: JSON.stringify({
         model: 'openrouter/free',
@@ -43,7 +43,7 @@ export default async function handler(req) {
             role: 'user',
             content: [
               { type: 'image_url', image_url: { url: `data:${imageMime};base64,${imageBase64}` } },
-              { type: 'text', text: prompt || 'Analyse this trading chart for educational purposes. This information does not cinstitute financial advice. Return ONLY the JSON object.' }
+              { type: 'text', text: prompt || 'Analyse this generic chart for the purpose of historical pattern research. This is for educational data analysis only. Return ONLY the JSON object.' }
             ]
           }
         ]
