@@ -35,7 +35,7 @@ export default async function handler(req) {
         'X-Title': 'FX BULLS AI Chart Analyser',
       },
       body: JSON.stringify({
-        model: 'google/gemini-2.5-flash',
+        model: 'openrouter/free',
         max_tokens: 2500,
         temperature: 0.1,
         messages: [
